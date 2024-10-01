@@ -71,6 +71,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 
         // Firebase 구성 정보 설정
@@ -107,17 +108,18 @@
         })
 
 
-        
+
         let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
-            fetch(url).then(res => res.json()).then(data => {
-                let temp = data['temp'];
-                $('#tempAA').text(temp);
-            })
+        fetch(url).then(res => res.json()).then(data => {
+            let temp = data['temp'];
+            $('#tempAA').text(temp);
+        })
 
         $("#savebtn").click(async function () {
             $('#postingbox').toggle();
         })
-        
+
+
         let docs = await getDocs(collection(db, "movies"));
         docs.forEach((doc) => {
             let row = doc.data();
@@ -125,6 +127,7 @@
             let title = row['title'];
             let comment = row['comment'];
             let star = row['star'];
+            let id = doc.id;
 
             let temp_html = `
             <div class="col">
@@ -135,12 +138,21 @@
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">${star}</p>
                         <p class="card-text">${comment}</p>
+                        <button id="delbtn" name="${id}" type="button" class="btn btn-outline-black">삭제하기</button>
                     </div>
                 </div>
             </div>`;
 
             $('#card').append(temp_html);
 
+            console.log(id);
+
+        });
+
+        // 동적으로 생성된 객체에 이벤트를 주는방법
+        $(document).on('click', '#delbtn', async (event) => {
+            await deleteDoc(doc(db, "movies", event.target.name));
+            window.location.reload();
         });
     </script>
 </head>
@@ -216,9 +228,12 @@
 
     <div class="mycards">
         <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
-            
+
         </div>
     </div>
 </body>
+<script>
+
+</script>
 
 </html>
