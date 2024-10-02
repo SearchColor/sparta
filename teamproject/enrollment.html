@@ -141,6 +141,25 @@
     } else {
       console.log("No such document!");
     }
+
+    $('#send').click(function () {
+
+      var filecheck = $('#imagefile').val();
+      if (!filecheck) {
+        alert('파일을 선택해주세요');
+        return false;
+      }
+
+      var file = document.querySelector('#imagefile').files[0];
+      const storageRef = ref(storage, 'images/' + file.name);
+
+      uploadBytes(storageRef, file).then((snapshot) => {
+        getDownloadURL(storageRef).then((url) => {
+          $('#image').val(url);
+          $("#profile").attr("src", url);
+        });
+      });
+    })
   </script>
 
   <script>
@@ -189,7 +208,10 @@
       <button type="button" class="btn btn-outline-dark" id="closebtn">
         닫기
       </button>
+
     </div>
+    <input class="btn btn-outline-dark" type="file" id="imagefile">
+    <button type="button" class="btn btn-outline-dark" id="send">upload</button>
   </div>
 </body>
 
