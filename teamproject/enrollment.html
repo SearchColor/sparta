@@ -131,10 +131,10 @@
         let introduceMyself = row["introduceMyself"];
 
         $("#memberimage").attr("src", image);
-        $("#name").var(name);
-        $("#mbti").var(mbti);
-        $("#hobby").var(hobby);
-        $("#blog").var(blog);
+        $('#name').val(name);
+        $("#mbti").val(mbti);
+        $("#hobby").val(hobby);
+        $("#blog").val(blog);
         $("#introduceMyself").var(introduceMyself);
       } else {
         console.log("No such document!");
@@ -147,7 +147,7 @@
       let param = new URLSearchParams(query);
       let selectedDocId = param.get("id");
 
-      console.log(id);
+      console.log(selectedDocId);
     </script>
   </head>
 
