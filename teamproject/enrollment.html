@@ -131,11 +131,11 @@
         let introduceMyself = row["introduceMyself"];
 
         $("#memberimage").attr("src", image);
-        $("#membername").text(name);
-        $("#membermbti").text(mbti);
-        $("#memberhobby").text(hobby);
-        $("#memberblog").text(blog);
-        $("#introduceMyself").text(introduceMyself);
+        $("#name").var(name);
+        $("#mbti").var(mbti);
+        $("#hobby").var(hobby);
+        $("#blog").var(blog);
+        $("#introduceMyself").var(introduceMyself);
       } else {
         console.log("No such document!");
       }
