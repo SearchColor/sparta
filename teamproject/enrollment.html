@@ -131,12 +131,13 @@
         
         let introduceMyself = row["introduceMyself"];
 
-        $("#image").attr("src", image);
+        $("#profile").attr("src", image);
+        $('#profile').attr("style","display: block;");
         $('#name').val(name);
         $("#mbti").val(mbti);
         $("#hobby").val(hobby);
         $("#blog").val(blog);
-        $("#introduceMyself").var(introduceMyself);
+        $("#introduceMyself").val(introduceMyself);
       } else {
         console.log("No such document!");
       }
@@ -153,6 +154,9 @@
   </head>
 
   <body>
+    <div>
+      <input type="image" src="" id="profile" style="height: 30%; width: 30%; display: none;">
+    </div>
     <div class="mypostingbox" id="postingbox">
       <div class="form-floating mb-3">
         <input
