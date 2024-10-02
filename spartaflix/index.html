@@ -151,6 +151,12 @@
 
         $('#send').click(function () {
 
+            var filecheck = $('#imagefile').val();
+            if(!filecheck){
+                alert('파일을 선택해주세요');
+                return false;
+            }
+
             var file = document.querySelector('#imagefile').files[0];
             const storageRef = ref(storage, 'images/' + file.name);
             
@@ -237,8 +243,11 @@
             <label for="floatingInput">영화 추천이유</label>
         </div>
         <button id="postingbtn" class="btn btn-danger">기록하기</button>
-        <input class="btn btn-outline-light me-2" type="file" id="imagefile">
-        <button type="button" class="btn btn-outline-light me-2" id="send">upload</button>
+        <div>
+            <input class="btn btn-outline-light me-2" type="file" id="imagefile">
+            <button type="button" class="btn btn-outline-light me-2" id="send">upload</button>
+        </div>
+        
     </div>
     
 
